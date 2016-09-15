@@ -36,7 +36,9 @@ class Views::Layouts::Application < Views::Base
       ) {
         widget Dvl::Core::Views::Flashes.new(flash: flash)
 
-        main
+        div(class: 'container') {
+          main
+        }
 
         render_widgets(:modals)
         rawtext '<!--[if lt IE 9]><script src="//d2yxgjkkbvnhdt.cloudfront.net/dist/polyfills.js"></script><![endif]-->'
