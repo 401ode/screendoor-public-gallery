@@ -1,0 +1,14 @@
+dependencies:
+  cache_directories:
+    - "public/assets"
+    - "tmp/cache/assets"
+
+database:
+  override:
+    - mv config/database.ci.yml config/database.yml
+    - bundle exec rake db:setup
+  post:
+    - "RAILS_ENV=test bundle exec rake assets:precompile assets:clean[0]"
+
+test:
+  override: script/cibuild
