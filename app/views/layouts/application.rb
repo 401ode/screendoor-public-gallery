@@ -11,6 +11,7 @@ class Views::Layouts::Application < Views::Base
   def stylesheets
     stylesheet_link_tag 'application', media: 'all'
     link rel: 'icon', type: 'image/png', href: '/apple-touch-icon-precomposed.png'
+    link href: 'https://fonts.googleapis.com/css?family=Open+Sans', rel: 'stylesheet'
   end
 
   def meta_tags
@@ -36,8 +37,12 @@ class Views::Layouts::Application < Views::Base
       ) {
         widget Dvl::Core::Views::Flashes.new(flash: flash)
 
+        div(class: 'hero') {
+          img src: asset_path('logo.png'), alt: "Logo for #{Rails.configuration.x.site_title}"
+          h1 Rails.configuration.x.site_title
+        }
+
         div(class: 'container') {
-          h1 'Screendoor Public Gallery'
           main
         }
 

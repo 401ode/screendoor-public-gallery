@@ -1,9 +1,9 @@
 class Views::Submissions::Index < Views::Layouts::Application
   def main
-    h2 'All submissions'
-    p "This is a example of using Screendoor's API to host a public gallery of submissions."
-
-    a 'Add a submission', href: new_submission_path, class: 'button info small'
+    div(class: 'page_header') {
+      h2 'All submissions'
+      a 'Add a submission', href: new_submission_path, class: 'button primary'
+    }
 
     ul {
       @submissions.each do |submission|
