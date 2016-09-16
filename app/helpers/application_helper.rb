@@ -9,9 +9,17 @@ module ApplicationHelper
     end
   end
 
+  def submission_title(submission)
+    submission.dig('responses', Rails.configuration.x.preview_field_id.to_s)
+  end
+
   def submission_meta(submission)
     "Submitted by #{submission.dig('responder', 'name')} on " \
-    "#{Date.parse(submission['created_at']).to_formatted_s(:long)}"
+    "#{submission_time(submission)}"
+  end
+
+  def submission_time(submission)
+    Date.parse(submission['submitted_at']).to_formatted_s(:long)
   end
 
   def screendoor_response_fields

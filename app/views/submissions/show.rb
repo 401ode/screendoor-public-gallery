@@ -10,11 +10,19 @@ class Views::Submissions::Show < Views::Layouts::Application
         i(class: 'fa fa-arrow-circle-o-left')
       }
 
-      h2 submission_meta(@submission)
+      h2 submission_title(@submission)
     }
 
     dl {
+      dt 'Submitted by'
+      dd submission.dig('responder', 'name')
+
+      dt 'Submitted at'
+      dd submission_time(submission)
+
       screendoor_response_fields.each do |rf|
+        next if rf['id'].to_s == Rails.configuration.x.preview_field_id.to_s
+
         dt rf['label']
         dd {
           if (x = submission.dig('responses', rf['id'].to_s).presence)
