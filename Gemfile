@@ -10,12 +10,12 @@ gem 'execjs'
 gem 'font-awesome-rails'
 gem 'fortitude', git: 'https://github.com/ajb/fortitude.git', branch: 'cacheing'
 gem 'http'
+gem 'pg'
 gem 'rails_oneline_logging'
 gem 'sassc-rails'
 gem 'simple_form'
 gem 'simple_form_legend'
 gem 'sprockets-rails'
-gem 'sqlite3'
 gem 'uglifier'
 
 # Assets
