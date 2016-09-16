@@ -1,6 +1,17 @@
 class Views::Submissions::Show < Views::Layouts::Application
   def main
-    h2 submission_meta(@submission)
+    div(class: 'page_header with_back_arrow with_no_context') {
+      a(
+        class: 'page_header_back_arrow',
+        title: 'Back to all submissions',
+        'data-toggle' => 'tooltip',
+        href: root_path(page: params[:from_page])
+      ) {
+        i(class: 'fa fa-arrow-circle-o-left')
+      }
+
+      h2 submission_meta(@submission)
+    }
 
     dl {
       screendoor_response_fields.each do |rf|
@@ -14,8 +25,6 @@ class Views::Submissions::Show < Views::Layouts::Application
         }
       end
     }
-
-    hr
 
     rawtext %{
       <div id="disqus_thread"></div>

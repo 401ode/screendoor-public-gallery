@@ -6,8 +6,18 @@ body {
 
 .container {
   @include container;
+  padding: $lineHeight 0;
 }
 
 h2 {
   font-size: 2rem;
+}
+
+.with_no_context {
+  .page_header_back_arrow {
+    top: $rhythm;
+    @media screen and (min-width: $lapWidth) {
+      top: $rhythm * 2;
+    }
+  }
 }
