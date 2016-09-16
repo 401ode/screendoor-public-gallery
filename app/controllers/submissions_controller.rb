@@ -18,40 +18,58 @@ class SubmissionsController < ApplicationController
 
   def check_for_submitted_param
     if params[:submitted] == 't'
-      redirect_to root_path, success: 'Your submission has been received!'
+      redirect_to root_path, success: 'Your submission has been received! It will appear on this page shortly.'
     end
   end
 
   def get_submissions
-    resp = HTTP.get(
-      "https://screendoor.dobt.co/api/projects/#{ENV.fetch('SCREENDOOR_PROJECT_ID')}/responses",
-      params: {
-        v: 0,
-        api_key: ENV.fetch('SCREENDOOR_API_KEY'),
-        per_page: PER_PAGE,
-        page: current_page,
-        response_format: 'html'
-      }
-    )
+    @submissions, @total_pages = Rails.cache.fetch(
+      ['submissions', current_page, rounded_time_for_cache]
+    ) do
+      resp = HTTP.get(
+        "https://screendoor.dobt.co/api/projects/#{ENV.fetch('SCREENDOOR_PROJECT_ID')}/responses",
+        params: {
+          v: 0,
+          api_key: ENV.fetch('SCREENDOOR_API_KEY'),
+          per_page: PER_PAGE,
+          page: current_page,
+          response_format: 'html'
+        }
+      )
 
-    @submissions = JSON.parse(resp)
-    @total_pages = (resp.headers['Total'].to_f / PER_PAGE).ceil
+      [
+        JSON.parse(resp),
+        (resp.headers['Total'].to_f / PER_PAGE).ceil
+      ]
+    end
   end
 
   def get_submission
-    resp = HTTP.get(
-      "https://screendoor.dobt.co/api/projects/#{ENV.fetch('SCREENDOOR_PROJECT_ID')}/responses/#{params[:id]}",
-      params: {
-        v: 0,
-        api_key: ENV.fetch('SCREENDOOR_API_KEY'),
-        response_format: 'html'
-      }
-    )
+    @submission = Rails.cache.fetch(
+      ['submission', params[:id], rounded_time_for_cache]
+    ) do
+      resp = HTTP.get(
+        "https://screendoor.dobt.co/api/projects/#{ENV.fetch('SCREENDOOR_PROJECT_ID')}/responses/#{params[:id]}",
+        params: {
+          v: 0,
+          api_key: ENV.fetch('SCREENDOOR_API_KEY'),
+          response_format: 'html'
+        }
+      )
 
-    if resp.code == 200
-      @submission = JSON.parse(resp)
-    else
-      not_found
+      if resp.code == 200
+        JSON.parse(resp)
+      end
     end
+
+    @submission || not_found
+  end
+
+  # Helper to cache every 5 minutes
+  def rounded_time_for_cache
+    cache_every_num_mins = 5
+    time = Time.now
+    step = cache_every_num_mins * 60
+    Time.at((time.to_r / step).round * step).utc.to_s
   end
 end
