@@ -17,10 +17,10 @@ module ApplicationHelper
   def screendoor_response_fields
     @@screendoor_response_fields ||= begin
       resp = HTTP.get(
-        "https://screendoor.dobt.co/api/projects/#{ENV.fetch('SCREENDOOR_PROJECT_ID')}/response_fields",
+        "https://screendoor.dobt.co/api/projects/#{Rails.configuration.x.screendoor_project_id}/response_fields",
         params: {
           v: 0,
-          api_key: ENV.fetch('SCREENDOOR_API_KEY')
+          api_key: Rails.configuration.x.screendoor_api_key
         }
       )
 

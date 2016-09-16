@@ -51,7 +51,7 @@ class Views::Layouts::Application < Views::Base
             m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
             })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-            ga('create', '#{Rails.configuration.x.ga_id}', 'auto');
+            ga('create', '#{Rails.configuration.x.google_analytics_id}', 'auto');
             ga('send', 'pageview');
           </script>
         }.squish

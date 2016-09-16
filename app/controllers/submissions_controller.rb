@@ -27,10 +27,10 @@ class SubmissionsController < ApplicationController
       ['submissions', current_page, rounded_time_for_cache]
     ) do
       resp = HTTP.get(
-        "https://screendoor.dobt.co/api/projects/#{ENV.fetch('SCREENDOOR_PROJECT_ID')}/responses",
+        "https://screendoor.dobt.co/api/projects/#{Rails.configuration.x.screendoor_project_id}/responses",
         params: {
           v: 0,
-          api_key: ENV.fetch('SCREENDOOR_API_KEY'),
+          api_key: Rails.configuration.x.screendoor_api_key,
           per_page: PER_PAGE,
           page: current_page,
           response_format: 'html'
@@ -49,10 +49,10 @@ class SubmissionsController < ApplicationController
       ['submission', params[:id], rounded_time_for_cache]
     ) do
       resp = HTTP.get(
-        "https://screendoor.dobt.co/api/projects/#{ENV.fetch('SCREENDOOR_PROJECT_ID')}/responses/#{params[:id]}",
+        "https://screendoor.dobt.co/api/projects/#{Rails.configuration.x.screendoor_project_id}/responses/#{params[:id]}",
         params: {
           v: 0,
-          api_key: ENV.fetch('SCREENDOOR_API_KEY'),
+          api_key: Rails.configuration.x.screendoor_api_key,
           response_format: 'html'
         }
       )
