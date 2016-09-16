@@ -1,0 +1,12 @@
+@import 'includes';
+
+.footer {
+  border-top: 1px solid $gray;
+  @include container;
+  padding: $rhythm * 2 0;
+
+  img {
+    width: 50px;
+    margin-right: $rhythm * 2;
+  }
+}

@@ -39,11 +39,21 @@ class Views::Layouts::Application < Views::Base
 
         div(class: 'hero') {
           img src: asset_path('logo.png'), alt: "Logo for #{Rails.configuration.x.site_title}"
-          h1 Rails.configuration.x.site_title
+          h1 {
+            a Rails.configuration.x.site_title, href: root_path
+          }
         }
 
         div(class: 'container') {
           main
+        }
+
+        div(class: 'footer') {
+          img src: asset_path('screendoor_logo.png'), alt: 'Screendoor Logo'
+          text "#{Rails.configuration.x.site_title} is powered by"
+          text ' '
+          a 'Screendoor', href: 'https://www.dobt.co/screendoor/'
+          text '.'
         }
 
         render_widgets(:modals)
