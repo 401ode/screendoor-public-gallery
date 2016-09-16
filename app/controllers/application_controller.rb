@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  include ApplicationHelper
+
   layout false
 
   # Prevent CSRF attacks by raising an exception.

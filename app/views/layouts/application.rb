@@ -37,6 +37,7 @@ class Views::Layouts::Application < Views::Base
         widget Dvl::Core::Views::Flashes.new(flash: flash)
 
         div(class: 'container') {
+          h1 'Screendoor Public Gallery'
           main
         }
 

@@ -30,6 +30,8 @@ module ScreendoorPublicGallery
     config.x.site_title = 'Screendoor Public Gallery'
     config.x.ga_id = 'XX'
     config.x.screendoor_embed_token = ENV.fetch('SCREENDOOR_EMBED_TOKEN')
+    config.x.screendoor_project_id = ENV.fetch('SCREENDOOR_PROJECT_ID')
     config.x.screendoor_api_key = ENV.fetch('SCREENDOOR_API_KEY')
+    config.x.preview_field_id = ENV.fetch('SCREENDOOR_PREVIEW_FIELD_ID')
   end
 end

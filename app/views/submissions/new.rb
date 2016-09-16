@@ -10,6 +10,8 @@ class Views::Submissions::New < Views::Layouts::Application
   end
 
   def main
+    h2 'New submission'
+
     form(
       'This form requires JavaScript to complete.',
       'data-formrenderer' => Rails.configuration.x.screendoor_embed_token

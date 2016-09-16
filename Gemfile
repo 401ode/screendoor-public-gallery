@@ -7,6 +7,7 @@ gem 'coffee-rails'
 gem 'execjs'
 gem 'font-awesome-rails'
 gem 'fortitude', git: 'https://github.com/ajb/fortitude.git', branch: 'cacheing'
+gem 'http'
 gem 'rails_oneline_logging'
 gem 'sassc-rails'
 gem 'simple_form'
@@ -17,7 +18,6 @@ gem 'uglifier'
 
 # Assets
 gem 'dvl-core', git: 'https://github.com/dobtco/dvl-core.git'
-gem 'dvl-kaminari-views'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-jquery-ujs'
