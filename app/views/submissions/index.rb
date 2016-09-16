@@ -5,13 +5,14 @@ class Views::Submissions::Index < Views::Layouts::Application
       a 'Add a submission', href: new_submission_path, class: 'button primary'
     }
 
-    ul {
+    div(class: 'grid') {
       @submissions.each do |submission|
-        li {
-          a submission.dig('responses', Rails.configuration.x.preview_field_id.to_s),
-            href: submission_path(submission['id'])
-
-          div submission_meta(submission)
+        div(class: 'item lap_six_columns') {
+          a(class: 'submission_card', href: submission_path(submission['id'])) {
+            span submission.dig('responses', Rails.configuration.x.preview_field_id.to_s),
+                 class: 'submission_card_title'
+            span submission_meta(submission), class: 'submission_card_meta'
+          }
         }
       end
     }

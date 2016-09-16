@@ -1,0 +1,29 @@
+@import 'includes';
+
+a.submission_card {
+  display: block;
+  background: #fff;
+  padding: $rhythm $rhythm * 2;
+  border: 1px solid $gray;
+  border-radius: $radius;
+  margin-bottom: $lineHeight;
+  text-decoration: none;
+
+  &:hover {
+    background: $lighterGray;
+  }
+}
+
+.submission_card_title,
+.submission_card_meta {
+  display: block;
+}
+
+.submission_card_title {
+  color: $bodyFontColor;
+}
+
+.submission_card_meta {
+  font-size: $fontSmall;
+  color: $darkGray;
+}
