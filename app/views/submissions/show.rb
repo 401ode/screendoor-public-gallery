@@ -20,12 +20,12 @@ class Views::Submissions::Show < Views::Layouts::Application
       dt 'Submitted at'
       dd submission_time(submission)
 
-      screendoor_response_fields.each do |rf|
-        next if rf['id'].to_s == Rails.configuration.x.preview_field_id.to_s
+      screendoor_form['field_data'].each do |field|
+        next if field['id'].to_s == Rails.configuration.x.preview_field_id.to_s
 
-        dt rf['label']
+        dt field['label']
         dd {
-          if (x = submission.dig('responses', rf['id'].to_s).presence)
+          if (x = submission.dig('responses', field['id'].to_s).presence)
             rawtext x
           else
             span 'No response', class: 'none'
